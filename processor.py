@@ -1,0 +1,13 @@
+import pandas as pd
+
+def preprocess(df1,regions_df):
+
+    df1=df1[df1['Season']=='Summer']
+
+    df1=df1.merge(regions_df,on='NOC',how='left')
+
+    df1.drop_duplicates(inplace=True)
+
+    df1=pd.concat([df1,pd.get_dummies(df1['Medal'])],axis=1)
+
+    return df1
